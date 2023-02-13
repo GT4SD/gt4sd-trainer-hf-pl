@@ -27,7 +27,7 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
       - name: Install gt4sd-trainer-lm from source
         run: |
-          pip install --no-deps .
+          pip install .
       - name: Check black
         run: |
           python -m black src/gt4sd --check --diff --color
