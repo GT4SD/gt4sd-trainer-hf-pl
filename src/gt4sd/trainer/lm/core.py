@@ -30,9 +30,9 @@ from typing import Dict, Optional, Tuple, Union
 import sentencepiece as _sentencepiece
 from pytorch_lightning import LightningDataModule, LightningModule
 
-from .pytorch_lightning_trainer import PyTorchLightningTrainingPipeline
 from .datasets.core import CGMDataModule, CLMDataModule, MLMDataModule, PLMDataModule
 from .models.core import LM_MODULE_FACTORY, CGMModule, CLMModule, MLMModule, PLMModule
+from .pytorch_lightning_trainer import PyTorchLightningTrainingPipeline
 
 # sentencepiece has to be loaded before lightning to avoid segfaults
 _sentencepiece
@@ -75,7 +75,6 @@ class LanguageModelingTrainingPipeline(PyTorchLightningTrainingPipeline):
             )
 
         if model_args["tokenizer"] is None:
-
             if model_args["model_name_or_path"] is not None:
                 model_args["tokenizer"] = model_args["model_name_or_path"]
             else:

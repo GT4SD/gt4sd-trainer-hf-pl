@@ -80,7 +80,6 @@ template_config = {
 
 
 def test_get_data_and_model_modules_mlm():
-
     test_pipeline = LanguageModelingTrainingPipeline()
 
     assert test_pipeline is not None
@@ -90,7 +89,6 @@ def test_get_data_and_model_modules_mlm():
     with importlib_resources.as_file(
         importlib_resources.files("gt4sd") / "trainer/lm/tests/lm_example.jsonl"
     ) as file_path:
-
         config["dataset_args"]["train_file"] = file_path
 
         config["dataset_args"]["validation_file"] = file_path
@@ -108,7 +106,6 @@ def test_get_data_and_model_modules_mlm():
 
 
 def test_get_data_and_model_modules_clm():
-
     test_pipeline = LanguageModelingTrainingPipeline()
 
     assert test_pipeline is not None
@@ -118,7 +115,6 @@ def test_get_data_and_model_modules_clm():
     with importlib_resources.as_file(
         importlib_resources.files("gt4sd") / "trainer/lm/tests/lm_example.jsonl"
     ) as file_path:
-
         config["dataset_args"]["train_file"] = file_path
         config["dataset_args"]["validation_file"] = file_path
         config["model_args"]["type"] = "clm"
@@ -136,7 +132,6 @@ def test_get_data_and_model_modules_clm():
 
 
 def test_get_data_and_model_modules_cgm():
-
     test_pipeline = LanguageModelingTrainingPipeline()
 
     assert test_pipeline is not None
@@ -146,7 +141,6 @@ def test_get_data_and_model_modules_cgm():
     with importlib_resources.as_file(
         importlib_resources.files("gt4sd") / "trainer/lm/tests/lm_example.jsonl"
     ) as file_path:
-
         config["dataset_args"]["train_file"] = file_path
         config["dataset_args"]["validation_file"] = file_path
         config["model_args"]["type"] = "cgm"
@@ -164,7 +158,6 @@ def test_get_data_and_model_modules_cgm():
 
 
 def test_get_data_and_model_modules_plm():
-
     test_pipeline = LanguageModelingTrainingPipeline()
 
     assert test_pipeline is not None
@@ -174,7 +167,6 @@ def test_get_data_and_model_modules_plm():
     with importlib_resources.as_file(
         importlib_resources.files("gt4sd") / "trainer/lm/tests/lm_example.jsonl"
     ) as file_path:
-
         config["dataset_args"]["train_file"] = file_path
         config["dataset_args"]["validation_file"] = file_path
         config["model_args"]["type"] = "plm"
@@ -192,7 +184,6 @@ def test_get_data_and_model_modules_plm():
 
 
 def test_add_callbacks():
-
     pipeline = LanguageModelingTrainingPipeline()
 
     assert pipeline is not None

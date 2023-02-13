@@ -190,7 +190,6 @@ class CGMModule(LMModule):
                 cache_dir=self.cache_dir,
             )
         else:
-
             config = AutoConfig.from_pretrained(
                 self.model_args["model_config_name"], cache_dir=self.cache_dir
             )

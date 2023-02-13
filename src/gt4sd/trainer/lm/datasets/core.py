@@ -143,7 +143,6 @@ class DataModule(pl.LightningDataModule):
         self.data_collator = default_data_collator
 
         if "num_dataloader_workers" not in self.dataset_args:
-
             self.dataset_args["num_dataloader_workers"] = 0
 
             cpus_count = os.cpu_count()

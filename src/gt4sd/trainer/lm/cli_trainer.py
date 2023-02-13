@@ -31,12 +31,12 @@ from dataclasses import dataclass, field
 from typing import IO, Iterable, Optional, Tuple, cast
 
 from .argument_parser import ArgumentParser, DataClass, DataClassType
-from .pytorch_lightning_trainer import PytorchLightningTrainingArguments
 from .core import (
     LanguageModelingDataArguments,
     LanguageModelingModelArguments,
     LanguageModelingTrainingPipeline,
 )
+from .pytorch_lightning_trainer import PytorchLightningTrainingArguments
 
 logger = logging.getLogger(__name__)
 
@@ -80,7 +80,6 @@ class TrainerArgumentParser(ArgumentParser):
                     trainer_arguments = arguments
                     break
             if trainer_arguments:
-
                 parser = ArgumentParser(
                     tuple(
                         [
@@ -159,7 +158,9 @@ def main() -> None:
     config = {
         arg.__name__: arg.__dict__
         for arg in args
-        if not isinstance(arg, TrainerArguments) and not isinstance(arg,list) and isinstance(arg.__name__, str)
+        if not isinstance(arg, TrainerArguments)
+        and not isinstance(arg, list)
+        and isinstance(arg.__name__, str)
     }
 
     pipeline = LanguageModelingTrainingPipeline()

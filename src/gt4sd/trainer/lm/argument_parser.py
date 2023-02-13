@@ -139,7 +139,6 @@ class ArgumentParser(HfArgumentParser):
                 else:
                     kwargs["required"] = True
             elif field.type is bool or field.type == Optional[bool]:
-
                 if field.default is True:
                     parser.add_argument(
                         f"--no_{field.name}",
