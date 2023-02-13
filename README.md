@@ -3,46 +3,11 @@
 Train Language Models via HuggingFace transformers and PyTorch Lightning.
 
 
-## Installation
-
-### Requirements
-
-Currently `gt4sd-lm-trainer` relies on:
-
-- python>=3.7,<3.9
-- pip>=19.1,<20.3
-
-We are actively working on relaxing these, so stay tuned or help us with this by [contributing](./CONTRIBUTING.md) to the project.
-
-### Conda
-
-The recommended way to install the `gt4sd-lm-trainer` is to create a dedicated conda environment, this will ensure all requirements are satisfied. For CPU:
-
-```sh
-git clone https://github.com/GT4SD/gt4sd-lm-trainer.git
-cd gt4sd-lm-trainer/
-conda env create -f conda.yml
-conda activate gt4sd
-```
-
-**Note:** by default `gt4sd-lm-trainer` is installed with CPU requirements on linux systems. If you have GPU available, run:
-
-```sh
-git clone https://github.com/GT4SD/gt4sd-lm-trainer.git
-cd gt4sd-lm-trainer/
-conda env create -f conda_gpu.yml
-conda activate gt4sd
-```
-
 ### Development setup & installation
 
-If you would like to contribute to the package, we recommend the following development setup:
-
+Create any virtual or conda environment compatible with the specs in setup.cfg. Then run:
 ```sh
-conda env create -f conda.yml
-conda activate gt4sd-lm-trainer
-# install gt4sd-lm-trainer in editable mode
-pip install --no-deps -e .
+pip install -e ".[dev]" 
 ```
 
 
@@ -88,7 +53,7 @@ gt4sd-pl-to-hf --hf_model_path ${HF_MODEL_PATH} --training_type ${TRAINING_TYPE}
 
 
 
-## References
+### References
 
 If you use `gt4sd` in your projects, please consider citing the following:
 
@@ -101,7 +66,7 @@ If you use `gt4sd` in your projects, please consider citing the following:
 }
 ```
 
-## License
+### License
 
 The `gt4sd` codebase is under MIT license.
 For individual model usage, please refer to the model licenses found in the original packages.
