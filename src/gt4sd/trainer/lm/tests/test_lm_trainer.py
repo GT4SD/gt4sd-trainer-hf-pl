@@ -27,14 +27,14 @@ import sentencepiece as _sentencepiece
 import importlib_resources
 from pytorch_lightning.callbacks.model_checkpoint import ModelCheckpoint
 
-from gt4sd.lm_trainer.lm.core import LanguageModelingTrainingPipeline  # type: ignore
-from gt4sd.lm_trainer.lm.lm_datasets import (  # type: ignore
+from gt4sd.trainer.lm.core import LanguageModelingTrainingPipeline  # type: ignore
+from gt4sd.trainer.lm.datasets.core import (  # type: ignore
     CGMDataModule,
     CLMDataModule,
     MLMDataModule,
     PLMDataModule,
 )
-from gt4sd.lm_trainer.lm.models import (  # type: ignore
+from gt4sd.trainer.lm.models.core import (  # type: ignore
     CGMModule,
     CLMModule,
     MLMModule,
@@ -88,7 +88,7 @@ def test_get_data_and_model_modules_mlm():
     config = template_config.copy()
 
     with importlib_resources.as_file(
-        importlib_resources.files("gt4sd") / "lm_trainer/tests/lm_example.jsonl"
+        importlib_resources.files("gt4sd") / "trainer/lm/tests/lm_example.jsonl"
     ) as file_path:
 
         config["dataset_args"]["train_file"] = file_path
@@ -116,7 +116,7 @@ def test_get_data_and_model_modules_clm():
     config = template_config.copy()
 
     with importlib_resources.as_file(
-        importlib_resources.files("gt4sd") / "lm_trainer/tests/lm_example.jsonl"
+        importlib_resources.files("gt4sd") / "trainer/lm/tests/lm_example.jsonl"
     ) as file_path:
 
         config["dataset_args"]["train_file"] = file_path
@@ -144,7 +144,7 @@ def test_get_data_and_model_modules_cgm():
     config = template_config.copy()
 
     with importlib_resources.as_file(
-        importlib_resources.files("gt4sd") / "lm_trainer/tests/lm_example.jsonl"
+        importlib_resources.files("gt4sd") / "trainer/lm/tests/lm_example.jsonl"
     ) as file_path:
 
         config["dataset_args"]["train_file"] = file_path
@@ -172,7 +172,7 @@ def test_get_data_and_model_modules_plm():
     config = template_config.copy()
 
     with importlib_resources.as_file(
-        importlib_resources.files("gt4sd") / "lm_trainer/tests/lm_example.jsonl"
+        importlib_resources.files("gt4sd") / "trainer/lm/tests/lm_example.jsonl"
     ) as file_path:
 
         config["dataset_args"]["train_file"] = file_path
