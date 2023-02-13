@@ -16,8 +16,8 @@ pip install -e ".[dev]"
 
 GT4SD provides a trainer client based on the `gt4sd-lm-trainer` CLI command. 
 ```console
-$ gt4sd-lm-trainer --help
-usage: gt4sd-trainer [-h] [--configuration_file CONFIGURATION_FILE]
+$ gt4sd-trainer-lm --help
+usage: gt4sd-trainer-lm [-h] [--configuration_file CONFIGURATION_FILE]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -32,13 +32,13 @@ To launch a training you have two options.
 You can either specify the path of a configuration file that contains the needed training parameters:
 
 ```sh
-gt4sd-lm-trainer  --training_pipeline_name ${TRAINING_PIPELINE_NAME} --configuration_file ${CONFIGURATION_FILE}
+gt4sd-trainer-lm  --training_pipeline_name ${TRAINING_PIPELINE_NAME} --configuration_file ${CONFIGURATION_FILE}
 ```
 
 Or you can provide directly the needed parameters as arguments:
 
 ```sh
-gt4sd-lm-trainer --type mlm --model_name_or_path mlm --training_file /path/to/train_file.jsonl --validation_file /path/to/valid_file.jsonl
+gt4sd-trainer-lm --type mlm --model_name_or_path mlm --training_file /path/to/train_file.jsonl --validation_file /path/to/valid_file.jsonl
 ```
 
 
