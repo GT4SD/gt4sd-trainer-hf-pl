@@ -1,4 +1,4 @@
-# GT4SD's Language Modeling trainer submodule 
+# GT4SD's trainer submodule for HF transformers and PyTorch Lightning
 
 Train Language Models via HuggingFace transformers and PyTorch Lightning.
 
