@@ -106,7 +106,7 @@ class TrainerArgumentParser(ArgumentParser):
         self.dataclass_types = [
             dataclass_type
             for dataclass_type in self.dataclass_types  # type:ignore
-            if "gt4sd.trainer.lm.TrainerArguments" not in str(dataclass_type)
+            if "gt4sd.trainer.hf_pl.TrainerArguments" not in str(dataclass_type)
         ]
         try:
             parsed_arguments = super().parse_json_file(  # type:ignore
