@@ -30,16 +30,16 @@ jobs:
           pip install .
       - name: Check black
         run: |
-          python -m black src/gt4sd --check --diff --color
+          python -m black src/gt4sd_trainer --check --diff --color
       - name: Check isort
         run: |
-          python -m isort src/gt4sd --check-only
+          python -m isort src/gt4sd_trainer --check-only
       - name: Check flake8
         run: |
-          python -m flake8 --disable-noqa --per-file-ignores="__init__.py:F401" src/gt4sd
+          python -m flake8 --disable-noqa --per-file-ignores="__init__.py:F401" src/gt4sd_trainer
       - name: Check mypy
         run: |
-          python -m mypy src/gt4sd
+          python -m mypy src/gt4sd_trainer
       - name: Run pytests
         run: |
           python -m pytest -sv

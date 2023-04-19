@@ -27,14 +27,14 @@ import sentencepiece as _sentencepiece
 import importlib_resources
 from pytorch_lightning.callbacks.model_checkpoint import ModelCheckpoint
 
-from gt4sd.trainer.hf_pl.core import LanguageModelingTrainingPipeline  # type: ignore
-from gt4sd.trainer.hf_pl.datasets.core import (  # type: ignore
+from gt4sd_trainer.hf_pl.core import LanguageModelingTrainingPipeline  # type: ignore
+from gt4sd_trainer.hf_pl.datasets.core import (  # type: ignore
     CGMDataModule,
     CLMDataModule,
     MLMDataModule,
     PLMDataModule,
 )
-from gt4sd.trainer.hf_pl.models.core import (  # type: ignore
+from gt4sd_trainer.hf_pl.models.core import (  # type: ignore
     CGMModule,
     CLMModule,
     MLMModule,
