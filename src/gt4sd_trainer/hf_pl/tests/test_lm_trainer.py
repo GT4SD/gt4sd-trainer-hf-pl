@@ -87,7 +87,7 @@ def test_get_data_and_model_modules_mlm():
     config = template_config.copy()
 
     with importlib_resources.as_file(
-        importlib_resources.files("gt4sd") / "trainer/hf_pl/tests/lm_example.jsonl"
+        importlib_resources.files("gt4sd_trainer") / "hf_pl/tests/lm_example.jsonl"
     ) as file_path:
         config["dataset_args"]["train_file"] = file_path
 
@@ -113,7 +113,7 @@ def test_get_data_and_model_modules_clm():
     config = template_config.copy()
 
     with importlib_resources.as_file(
-        importlib_resources.files("gt4sd") / "trainer/hf_pl/tests/lm_example.jsonl"
+        importlib_resources.files("gt4sd_trainer") / "hf_pl/tests/lm_example.jsonl"
     ) as file_path:
         config["dataset_args"]["train_file"] = file_path
         config["dataset_args"]["validation_file"] = file_path
@@ -139,7 +139,7 @@ def test_get_data_and_model_modules_cgm():
     config = template_config.copy()
 
     with importlib_resources.as_file(
-        importlib_resources.files("gt4sd") / "trainer/hf_pl/tests/lm_example.jsonl"
+        importlib_resources.files("gt4sd_trainer") / "hf_pl/tests/lm_example.jsonl"
     ) as file_path:
         config["dataset_args"]["train_file"] = file_path
         config["dataset_args"]["validation_file"] = file_path
@@ -165,7 +165,7 @@ def test_get_data_and_model_modules_plm():
     config = template_config.copy()
 
     with importlib_resources.as_file(
-        importlib_resources.files("gt4sd") / "trainer/hf_pl/tests/lm_example.jsonl"
+        importlib_resources.files("gt4sd_trainer") / "hf_pl/tests/lm_example.jsonl"
     ) as file_path:
         config["dataset_args"]["train_file"] = file_path
         config["dataset_args"]["validation_file"] = file_path
