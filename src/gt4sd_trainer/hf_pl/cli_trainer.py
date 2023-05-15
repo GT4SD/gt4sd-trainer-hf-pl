@@ -162,7 +162,7 @@ def main() -> None:
         and not isinstance(arg, list)
         and isinstance(arg.__name__, str)
     }
-
+    
     pipeline = LanguageModelingTrainingPipeline()
     pipeline.train(**config)
 
