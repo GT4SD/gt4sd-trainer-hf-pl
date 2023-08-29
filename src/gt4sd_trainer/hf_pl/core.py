@@ -220,7 +220,13 @@ class LanguageModelingModelArguments:
     cache_dir: Union[str, None] = field(
         default=None,
         metadata={
-            "help": "Where do you want to store the pretrained models downloaded from huggingface.co."
+            "help": "Cache directory for HF models."
+        },
+    )
+    torch_compile: bool = field(
+        default=True,
+        metadata={
+            "help": "Use torch compile."
         },
     )
 

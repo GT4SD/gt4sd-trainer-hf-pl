@@ -144,7 +144,7 @@ class LMModule(BaseLightningModule):
         Args:
             model_args: model's arguments.
         """
-        super().__init__()
+        super().__init__(model_args)
 
         self.model: AutoModel
         self.tokenizer: AutoTokenizer
@@ -154,6 +154,9 @@ class LMModule(BaseLightningModule):
             self.cache_dir = model_args["cache_dir"]
 
         self.init_model()
+
+        if model_args["torch_compile"]:
+            self.model = torch.compile(self.model)
 
     def init_model(self) -> None:
         """Initialize an AutoModel."""
