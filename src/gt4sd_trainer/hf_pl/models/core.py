@@ -24,10 +24,11 @@
 """Model for Language Modeling."""
 
 import logging
-from typing import Dict, Type, Union
+from typing import Any, Dict, Type, Union
 
 import sentencepiece as _sentencepiece
 import pytorch_lightning as pl
+import torch
 import torch.optim as optim
 from torch import Tensor
 from transformers import (
@@ -47,14 +48,14 @@ logger = logging.getLogger(__name__)
 logger.addHandler(logging.NullHandler())
 
 
-class LMModule(pl.LightningModule):
-    """Pytorch lightning model for LM training."""
+class BaseLightningModule(pl.LightningModule):
+    """Pytorch lightning base model."""
 
     def __init__(
         self,
-        model_args: Dict[str, Union[float, int, str]],
+        model_args: Dict[str, Any],
     ) -> None:
-        """Construct an LM lightning module.
+        """Construct a Pytorch lightning base model.
         Args:
             model_args: model's arguments.
         """
@@ -62,34 +63,10 @@ class LMModule(pl.LightningModule):
 
         self.model_args = model_args
 
-        self.model: AutoModel
-        self.tokenizer: AutoTokenizer
-
-        self.cache_dir = None
-        if "cache_dir" in model_args:
-            self.cache_dir = model_args["cache_dir"]
-
-        self.init_model()
-
-    def init_model(self) -> None:
-        """Initialize an AutoModel."""
-
-        if self.model_args["model_name_or_path"] is not None:
-            self.model = AutoModel.from_pretrained(
-                self.model_args["model_name_or_path"],
-                cache_dir=self.cache_dir,
-            )
-        else:
-            config = AutoConfig.from_pretrained(
-                self.model_args["model_config_name"], cache_dir=self.cache_dir
-            )
-
-            self.model = AutoModel.from_config(config)
-
-            logger.info("Training from scratch")
+        self.model: torch.nn.Module
 
     def forward(self, x: Tensor) -> Tensor:  # type: ignore
-        """Forward pass on Transformer model.
+        """Forward pass.
         Args:
             x: tensor of shape (batch_size, seq_length) containing the input_ids.
         Returns:
@@ -114,7 +91,11 @@ class LMModule(pl.LightningModule):
         if not isinstance(self.model_args["lr_decay"], float):
             raise ValueError("Learning rate decay rate should be float")
 
-        optimizer = optim.AdamW(self.parameters(), lr=self.model_args["lr"])
+        optimizer = optim.AdamW(
+            self.parameters(),
+            lr=self.model_args["lr"],
+            weight_decay=self.model_args["weight_decay"],
+        )
 
         scheduler = optim.lr_scheduler.StepLR(optimizer, 1, self.model_args["lr_decay"])
 
@@ -150,6 +131,46 @@ class LMModule(pl.LightningModule):
         loss = self.model(**batch).loss  # type:ignore
         self.log("val_loss", loss)
         return loss
+
+
+class LMModule(BaseLightningModule):
+    """Pytorch lightning model for LM training."""
+
+    def __init__(
+        self,
+        model_args: Dict[str, Union[float, int, str]],
+    ) -> None:
+        """Construct an LM lightning module.
+        Args:
+            model_args: model's arguments.
+        """
+        super().__init__()
+
+        self.model: AutoModel
+        self.tokenizer: AutoTokenizer
+
+        self.cache_dir = None
+        if "cache_dir" in model_args:
+            self.cache_dir = model_args["cache_dir"]
+
+        self.init_model()
+
+    def init_model(self) -> None:
+        """Initialize an AutoModel."""
+
+        if self.model_args["model_name_or_path"] is not None:
+            self.model = AutoModel.from_pretrained(
+                self.model_args["model_name_or_path"],
+                cache_dir=self.cache_dir,
+            )
+        else:
+            config = AutoConfig.from_pretrained(
+                self.model_args["model_config_name"], cache_dir=self.cache_dir
+            )
+
+            self.model = AutoModel.from_config(config)
+
+            logger.info("Training from scratch")
 
 
 class MLMModule(LMModule):

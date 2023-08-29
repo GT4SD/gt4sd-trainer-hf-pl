@@ -213,6 +213,10 @@ class LanguageModelingModelArguments:
         default=0.5,
         metadata={"help": "The learning rate decay."},
     )
+    weight_decay: float = field(
+        default=0.01,
+        metadata={"help": "Weight decay (L2)."},
+    )
     cache_dir: Union[str, None] = field(
         default=None,
         metadata={
