@@ -219,15 +219,7 @@ class LanguageModelingModelArguments:
     )
     cache_dir: Union[str, None] = field(
         default=None,
-        metadata={
-            "help": "Cache directory for HF models."
-        },
-    )
-    torch_compile: bool = field(
-        default=True,
-        metadata={
-            "help": "Use torch compile."
-        },
+        metadata={"help": "Cache directory for HF models."},
     )
 
 

@@ -155,9 +155,6 @@ class LMModule(BaseLightningModule):
 
         self.init_model()
 
-        if model_args["torch_compile"]:
-            self.model = torch.compile(self.model)
-
     def init_model(self) -> None:
         """Initialize an AutoModel."""
 
