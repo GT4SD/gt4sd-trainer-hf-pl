@@ -74,9 +74,7 @@ class BaseLightningModule(pl.LightningModule):
         """
         return self.model(x).logits  # type:ignore
 
-    def configure_optimizers(
-        self,
-    ) -> Dict[str, object]:
+    def configure_optimizers(self) -> Dict[str, object]:  # type:ignore
         """Create and return the optimizer.
         Returns:
             output (dict of str: Any):
