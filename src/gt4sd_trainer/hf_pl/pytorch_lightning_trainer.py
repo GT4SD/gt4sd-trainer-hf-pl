@@ -59,11 +59,11 @@ class PyTorchLightningTrainingPipeline:
         logger.info(f"Trainer arguments: {pl_trainer_args}")
 
         if pl_trainer_args[
-            "resume_from_checkpoint"
-        ] is not None and not pl_trainer_args["resume_from_checkpoint"].endswith(
+            "ckpt_path"
+        ] is not None and not pl_trainer_args["ckpt_path"].endswith(
             ".ckpt"
         ):
-            pl_trainer_args["resume_from_checkpoint"] = None
+            pl_trainer_args["ckpt_path"] = None
 
         pl_trainer_args["callbacks"] = {
             "model_checkpoint_callback": {
@@ -173,7 +173,7 @@ class PytorchLightningTrainingArguments:
         default=3,
         metadata={"help": "Stop training once this number of epochs is reached."},
     )
-    resume_from_checkpoint: Optional[str] = field(
+    ckpt_path: Optional[str] = field(
         default=None,
         metadata={"help": "Path/URL of the checkpoint from which training is resumed."},
     )
