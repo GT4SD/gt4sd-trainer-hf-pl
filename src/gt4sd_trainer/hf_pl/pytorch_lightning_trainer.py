@@ -58,15 +58,14 @@ class PyTorchLightningTrainingPipeline:
 
         logger.info(f"Trainer arguments: {pl_trainer_args}")
 
-        if pl_trainer_args[
-            "resume_from_checkpoint"
-        ] is not None and not pl_trainer_args["resume_from_checkpoint"].endswith(
-            ".ckpt"
-        ):
-            pl_trainer_args["resume_from_checkpoint"] = None
+        if pl_trainer_args["dirpath"] is not None and not pl_trainer_args[
+            "dirpath"
+        ].endswith(".ckpt"):
+            pl_trainer_args["dirpath"] = None
 
         pl_trainer_args["callbacks"] = {
             "model_checkpoint_callback": {
+                "dirpath": pl_trainer_args["dirpath"],
                 "monitor": pl_trainer_args["monitor"],
                 "save_top_k": pl_trainer_args["save_top_k"],
                 "mode": pl_trainer_args["mode"],
@@ -78,6 +77,7 @@ class PyTorchLightningTrainingPipeline:
 
         del (
             pl_trainer_args["monitor"],
+            pl_trainer_args["dirpath"],
             pl_trainer_args["save_top_k"],
             pl_trainer_args["mode"],
             pl_trainer_args["every_n_train_steps"],
@@ -142,8 +142,17 @@ class PytorchLightningTrainingArguments:
 
     __name__ = "pl_trainer_args"
 
+    accelerator: Optional[str] = field(
+        default="auto",
+        metadata={
+            "help": "Training accelerator ('cpu', 'gpu', 'tpu', 'ipu', 'hpu', 'mps', 'auto')"
+        },
+    )
     strategy: Optional[str] = field(
-        default="ddp", metadata={"help": "Training strategy."}
+        default="auto",
+        metadata={
+            "help": "Training strategy ('ddp', 'ddp_spawn', 'deepspeed', 'auto')"
+        },
     )
     accumulate_grad_batches: int = field(
         default=1,
@@ -173,13 +182,13 @@ class PytorchLightningTrainingArguments:
         default=3,
         metadata={"help": "Stop training once this number of epochs is reached."},
     )
-    resume_from_checkpoint: Optional[str] = field(
+    dirpath: Optional[str] = field(
         default=None,
         metadata={"help": "Path/URL of the checkpoint from which training is resumed."},
     )
-    gpus: Optional[int] = field(
+    devices: Optional[int] = field(
         default=-1,
-        metadata={"help": "Number of gpus to train on."},
+        metadata={"help": "Number of devices (including gpus) to train on."},
     )
     monitor: Optional[str] = field(
         default=None,
