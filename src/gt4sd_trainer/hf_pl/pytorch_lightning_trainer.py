@@ -179,13 +179,7 @@ class PytorchLightningTrainingArguments:
     )
     gpus: Optional[int] = field(
         default=-1,
-        metadata={
-            "help": "Number of gpus to train on. Warning: argument 'gpus' is deprecated in pytorch-lightning=>2.0.0, we are keeping it in PytorchLightningTrainingArguments for the sake of compatibility."
-        },
-    )
-    devices: Optional[Union[List[int], str, int]] = field(
-        default="auto",
-        metadata={"help": "Number of devices on which to train on."},
+        metadata={"help": "Number of gpus to train on."},
     )
     monitor: Optional[str] = field(
         default=None,
@@ -215,8 +209,3 @@ class PytorchLightningTrainingArguments:
         default=None,
         metadata={"help": "Number of epochs between checkpoints."},
     )
-
-    def __post_init__(self):
-        if self.devices is None and self.gpus is not None:
-            self.devices = self.gpus
-        del self.gpus
