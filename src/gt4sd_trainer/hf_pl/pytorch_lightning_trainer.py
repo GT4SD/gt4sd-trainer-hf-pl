@@ -177,8 +177,8 @@ class PytorchLightningTrainingArguments:
         default=None,
         metadata={"help": "Path/URL of the checkpoint from which training is resumed."},
     )
-    devices: Optional[Union[List[int], str, int]] = field(
-        default='auto',
+    devices: Optional[str] = field(
+        default="auto",
         metadata={"help": "Number of devices (including gpus) to train on."},
     )
     monitor: Optional[str] = field(
