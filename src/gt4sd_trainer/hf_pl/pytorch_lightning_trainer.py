@@ -142,8 +142,11 @@ class PytorchLightningTrainingArguments:
 
     __name__ = "pl_trainer_args"
 
+    accelerator: Optional[str] = field(
+        default="auto", metadata={"help": "Training accelerator ('cpu', 'gpu', 'tpu', 'ipu', 'hpu', 'mps', 'auto')"}
+    )
     strategy: Optional[str] = field(
-        default="ddp", metadata={"help": "Training strategy."}
+        default="auto", metadata={"help": "Training strategy ('ddp', 'ddp_spawn', 'deepspeed', 'auto')"}
     )
     accumulate_grad_batches: int = field(
         default=1,
@@ -177,7 +180,7 @@ class PytorchLightningTrainingArguments:
         default=None,
         metadata={"help": "Path/URL of the checkpoint from which training is resumed."},
     )
-    devices: Optional[str] = field(
+    devices: Optional[Union[str, int]] = field(
         default="auto",
         metadata={"help": "Number of devices (including gpus) to train on."},
     )
