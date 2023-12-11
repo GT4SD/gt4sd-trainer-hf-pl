@@ -75,6 +75,9 @@ template_config = {
         "save_top_k": 2,
         "mode": "min",
         "every_n_train_steps": 50000,
+        "devices": None,
+        "accelerator": "auto",
+        "strategy": "auto",
     },
 }
 
